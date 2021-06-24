@@ -1,21 +1,48 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+  <mat-horizontal-stepper style="height: 90%;margin: 10%;"linear #stepper>
+    <mat-step >
+        <ng-template matStepLabel>Destination</ng-template>
+        <mat-form-field appearance="outline">
+          <mat-label>Lieu</mat-label>
+          <input matInput [(ngModel)]="city">
+        </mat-form-field>
 
-<router-outlet></router-outlet>
+        <div>
+          <button mat-raised-button color="primary" (click)="onFilterSet()" matStepperNext>Départ</button>
+        </div>
+    </mat-step>
+    <mat-step >
+        <ng-template matStepLabel>List</ng-template>
+        <mat-grid-list *ngIf="imageList != undefined" cols="2" rowHeight="2:1">
+          <mat-grid-tile *ngFor="let photo of imageList" (click)="selectedPicture(photo)" [ngClass]="{'selected-image-view': selectedImage === photo}">
+            <img style="height: 90%;" [src]="photo.src.original"/>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Résultats</ng-template>
+      <div>
+        <div *ngIf="selectedImage != undefined">
+          <img class="postal-card" style="width: 30%;" [src]="selectedImage.src.original"/>
+          <img class="postal-card" style="width: 30%;" src="assets/images/post-card-model.png"/>
+        </div>
+
+
+
+      </div>
+      <div>
+        <button mat-button mat-raised-button (click)="downloadUrl(this.selectedImage.src.original,'my-postal-card-'+this.counter.toString()+'.png')">Télécharger</button>
+        <button mat-button mat-raised-button [disabled]="true">Partagger</button>
+        <button mat-button mat-raised-button (click)="stepper.reset()">Recommencer</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+
+
+
