@@ -29,16 +29,16 @@ export class AppComponent {
     headers = headers.append('Content-Type',"application/json");
     console.log(headers);
 
-    this.imageList = [
+    /*this.imageList = [
       {src : {original : "https://images.pexels.com/photos/1059078/pexels-photo-1059078.jpeg"}},
       {src : {original : "https://images.pexels.com/photos/1059078/pexels-photo-1059078.jpeg"}},
       {src : {original : "https://images.pexels.com/photos/1059078/pexels-photo-1059078.jpeg"}},
       {src : {original : "https://images.pexels.com/photos/1059078/pexels-photo-1059078.jpeg"}}
-    ];
-    /*this.http.get(`https://api.pexels.com/v1/search?query=${this.city} landscape&per_page=4&orientation=landscape`, {headers : headers}).subscribe((resp : PexelsResponse) =>{
+    ];*/
+    this.http.get(`https://api.pexels.com/v1/search?query=${this.city} landscape&per_page=4&orientation=landscape`, {headers : headers}).subscribe((resp : PexelsResponse) =>{
       console.log('response',resp);
       this.imageList = resp.photos;
-    });*/
+    });
   }
 
   selectedPicture(picture){

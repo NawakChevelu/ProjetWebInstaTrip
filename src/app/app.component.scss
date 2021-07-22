@@ -13,6 +13,13 @@
   width: 50%;
 }
 
+::ng-deep #cdk-step-content-0-2{
+  height: 150%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .selected-image-view{
   border: 2px solid #3f51b5;
   border-radius: 10px;
@@ -27,4 +34,10 @@
 
 button {
   margin: 0px 5px 0px 5px;
+}
+
+.image-card{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

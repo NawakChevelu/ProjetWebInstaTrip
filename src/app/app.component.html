@@ -27,15 +27,15 @@
     <mat-step>
       <ng-template matStepLabel>Résultats</ng-template>
       <div>
-        <div *ngIf="selectedImage != undefined">
-          <img class="postal-card" style="width: 30%;" [src]="selectedImage.src.original"/>
-          <img class="postal-card" style="width: 30%;" src="assets/images/post-card-model.png"/>
+        <div *ngIf="selectedImage != undefined" class="image-card">
+          <img  style="width: 30%;" [src]="selectedImage.src.original"/>
+          <img [ngStyle]="{'background-color': this.selectedImage.avg_color}" style="width: 30%;" src="assets/images/post-card-model.png"/>
         </div>
 
 
 
       </div>
-      <div>
+      <div style="margin : 16px 0px 16px 0px">
         <button mat-button mat-raised-button (click)="downloadUrl(this.selectedImage.src.original,'my-postal-card-'+this.counter.toString()+'.png')">Télécharger</button>
         <button mat-button mat-raised-button [disabled]="true">Partagger</button>
         <button mat-button mat-raised-button (click)="stepper.reset()">Recommencer</button>
